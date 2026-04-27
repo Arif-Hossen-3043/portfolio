@@ -1,14 +1,13 @@
 <!-- Navbar -->
-<nav class="bg-gray-800 shadow">
+<nav class="bg-black text-gray-200">
 
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
 
         <!-- Clickable Logo -->
         <a href="/" class="flex items-center space-x-2">
 
-            <img src="{{ asset('images/logo.png') }}"
-                 alt="Logo"
-                 class="h-12 w-12 rounded-full object-cover border-2 border-gray-700">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo"
+                class="h-12 w-12 rounded-full object-cover border-2 border-gray-700">
 
             <span class="text-xl font-bold hover:text-gray-400">
                 My Portfolio
