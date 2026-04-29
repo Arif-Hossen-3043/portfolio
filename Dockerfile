@@ -1,19 +1,18 @@
-FROM php:8.2-fpm
+FROM php:8.2-cli
 
-# Install minimal dependencies (skip DB drivers)
 RUN apt-get update && apt-get install -y \
-    git curl unzip libzip-dev zip \
-    && docker-php-ext-install mbstring zip
+    libonig-dev \
+    libzip-dev \
+    unzip \
+    git
 
-# Install Composer
-COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+RUN docker-php-ext-install pdo pdo_mysql mbstring zip
 
+COPY . /var/www
 WORKDIR /var/www
 
-# Copy app files
-COPY . .
+RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
 
-# Install PHP dependencies
-RUN composer install --no-dev --optimize-autoloader
+RUN composer install
 
-CMD ["php-fpm"]
+CMD php artisan serve --host=0.0.0.0 --port=10000
